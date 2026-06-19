@@ -24,17 +24,17 @@ namespace Tool_shop.PageObject.InicioSesionPage
             WaitForElementToBeClickable(btnMenuIniciarSesion).Click();
         }
 
-        // NUEVO: Método para escribir simulando a un humano
+     
         private void EnviarTextoLetraPorLetra(IWebElement elemento, string texto)
         {
             elemento.Click();
             elemento.Clear();
 
-            // Recorremos el texto y enviamos cada letra con una micro-pausa
+            
             foreach (char letra in texto)
             {
                 elemento.SendKeys(letra.ToString());
-                System.Threading.Thread.Sleep(80); // 80 milisegundos de retraso por letra
+                System.Threading.Thread.Sleep(80); 
             }
         }
 
@@ -48,14 +48,14 @@ namespace Tool_shop.PageObject.InicioSesionPage
         {
             var campoPassword = WaitForElementToBeClickable(tbxPassword);
             EnviarTextoLetraPorLetra(campoPassword, password);
-            campoPassword.SendKeys(Keys.Tab); // Quitamos el foco
+            campoPassword.SendKeys(Keys.Tab); 
         }
 
         public void ClickLogin()
         {
             var botonSubmit = WaitForElementToBeClickable(btnSubmit);
 
-            // Probamos con un clic normal limpio, ya que los textos entraron bien
+            
             botonSubmit.Click();
         }
 
@@ -73,8 +73,7 @@ namespace Tool_shop.PageObject.InicioSesionPage
 
             ClickLogin();
 
-            // Le damos 3 segundos al navegador después del clic para que cargue la otra página 
-            // antes de que el test intente evaluar la URL.
+            
             System.Threading.Thread.Sleep(3000);
         }
     }
