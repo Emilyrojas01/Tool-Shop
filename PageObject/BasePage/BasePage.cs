@@ -1,6 +1,5 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
-using SeleniumExtras.WaitHelpers; // 👈 ¡Súper Importante! Agrega este using
 using System;
 
 namespace Tool_Shop.PageObject
@@ -9,18 +8,29 @@ namespace Tool_Shop.PageObject
     {
         protected IWebDriver Driver;
         protected WebDriverWait Wait;
-        private object resultado;
 
         protected BasePage(IWebDriver driver)
         {
             Driver = driver;
+            
             Wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
         }
 
-        // CORREGIDO: Ahora sí espera de verdad hasta 10 segundos a que el elemento aparezca
+     
         protected IWebElement WaitForElement(By Locator)
         {
-            return Wait.Until(ExpectedConditions.ElementExists(Locator));
+            return Wait.Until(d => d.FindElement(Locator));
+        }
+
+       
+        protected IWebElement WaitForElementToBeClickable(By Locator)
+        {
+            return Wait.Until(d =>
+            {
+                var element = d.FindElement(Locator);
+                
+                return (element.Displayed && element.Enabled) ? element : null;
+            });
         }
 
         public string GetCurrentUrl()

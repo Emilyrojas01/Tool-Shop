@@ -13,7 +13,7 @@ namespace Tool_Shop.Tests
 
         protected IWebDriver Driver;
 
-        protected string reportTestPage = "hello";
+        protected string reportTestPage = "";
         public static ExtentTest extentTest;
         public static ExtentReports extent;
 
